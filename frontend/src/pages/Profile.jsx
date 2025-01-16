@@ -24,7 +24,7 @@ const Profile = () => {
             const response = await axios.get('http://localhost:8000/api/v1/users/current-user', {
                 withCredentials: true
             });
-            console.log('Profile response:', response.data); // Debug log
+
 
             if (response.data.data) {
                 const userData = response.data.data;

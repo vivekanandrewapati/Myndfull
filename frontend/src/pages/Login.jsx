@@ -30,13 +30,13 @@ function Login() {
             const response = await axios.post('http://localhost:8000/api/v1/users/login', formData, {
                 withCredentials: true
             });
-            console.log(response.data);
+
             if (response.data.success) {
                 // Store tokens and user data
                 localStorage.setItem('accessToken', response.data.data.accessToken);
 
 
-                console.log('Login successful:', response.data);
+
 
                 navigate('/');
             }

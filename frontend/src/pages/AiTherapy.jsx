@@ -53,7 +53,7 @@ function AiTherapy() {
 
                 if (userResponse.data?.data) {
                     setCurrentUser(userResponse.data.data);
-                    console.log("Current user fetched:", userResponse.data.data);
+
                 }
 
                 // Then fetch posts

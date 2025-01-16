@@ -34,7 +34,8 @@ function Community() {
 
                 if (userResponse.data?.data) {
                     setCurrentUser(userResponse.data.data);
-                    console.log("Current user fetched:", userResponse.data.data);
+
+
                 }
 
                 // Then fetch posts
@@ -96,7 +97,7 @@ function Community() {
 
         try {
             const token = localStorage.getItem('accessToken');
-            console.log('Using token for post:', token);
+
 
             const response = await axios.post('http://localhost:8000/api/v1/community', {
                 content: newPost,
@@ -109,7 +110,7 @@ function Community() {
                 }
             });
 
-            console.log('Post created:', response.data);
+
             setPosts(prev => [response.data.data, ...prev]);
             setNewPost('');
             setIsAnonymous(false);
