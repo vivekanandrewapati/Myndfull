@@ -31,9 +31,9 @@ const Main = () => {
                 <Route path='/login' element={<Login />} />
                 <Route path='/signup' element={<Register />} />
                 <Route path='/meditation' element={<Meditation />} />
-                <Route path='/AiTherapy' element={<AiTherapy />} />
+                <Route path='/aitherapy' element={<AiTherapy />} />
                 <Route path='/sos' element={<Sos />} />
-                <Route path='/Community' element={<Community />} />
+                <Route path='/community' element={<Community />} />
                 <Route path='/profile' element={<Profile />} />
             </Route>
         )

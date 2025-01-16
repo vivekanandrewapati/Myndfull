@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { NavLink, Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo1.png';
 import axios from 'axios';
+import { FiMenu, FiX } from 'react-icons/fi';
 
 function Header() {
     const navigate = useNavigate();
@@ -27,83 +28,126 @@ function Header() {
     };
 
     return (
-        <header>
-            <nav>
-                <div className="container mx-auto flex items-center justify-between px-6 py-4">
-                    {/* Brand Logo */}
-
-                    <div className=" flex text-2xl font-heading font-bold text-primary-500">
-                        <img className=' mx-2 w-[40px] h-[40px]' src={logo} alt="" />
-                        <Link to="/">MyndFull</Link>
-
+        <header className="bg-white shadow-sm sticky top-0 z-50">
+            <nav className="container mx-auto px-4 py-3">
+                <div className="flex items-center justify-between">
+                    {/* Brand Logo - Responsive at all sizes */}
+                    <div className="flex items-center space-x-2">
+                        <img
+                            className="w-[25px] h-[25px] sm:w-[30px] sm:h-[30px] lg:w-[40px] lg:h-[40px]"
+                            src={logo}
+                            alt="MyndFull Logo"
+                        />
+                        <Link
+                            to="/"
+                            className="text-lg sm:text-xl lg:text-2xl font-heading font-bold text-primary-500"
+                        >
+                            MyndFull
+                        </Link>
                     </div>
 
-                    {/* Navigation Links */}
-                    <div className="hidden md:flex space-x-10">
-                        <a href="/aboutus" className="text-text-600 hover:text-primary-500 transition-colors font-body">
+                    {/* Desktop Navigation */}
+                    <div className="hidden lg:flex items-center space-x-3 xl:space-x-6">
+                        <NavLink
+                            to="/aboutus"
+                            className="text-sm xl:text-base text-text-600 hover:text-primary-500 transition-colors font-body whitespace-nowrap"
+                        >
                             ABOUT US
-                        </a>
+                        </NavLink>
                         <NavLink
                             to="/login"
-                            className="text-text-600 hover:text-primary-500 transition-colors font-body"
+                            className="text-sm xl:text-base text-text-600 hover:text-primary-500 transition-colors font-body whitespace-nowrap"
                         >
                             LOGIN
                         </NavLink>
-                        <a href="mailto:myndfull@gmail.com" className="text-text-600 hover:text-primary-500 transition-colors font-body">
+                        <a
+                            href="mailto:myndfull@gmail.com"
+                            className="text-sm xl:text-base text-text-600 hover:text-primary-500 transition-colors font-body whitespace-nowrap"
+                        >
                             CONTACT US
                         </a>
                         <button
                             onClick={handleLogout}
-                            className="text-text-600 hover:text-primary-500 transition-colors font-body"
+                            className="text-sm xl:text-base text-text-600 hover:text-primary-500 transition-colors font-body whitespace-nowrap"
                         >
                             LOGOUT
                         </button>
-                        <NavLink to="/profile" className="text-text-600 hover:text-primary-500 transition-colors font-body">
+                        {/* <NavLink
+                            to="/profile"
+                            className="text-sm xl:text-base text-text-600 hover:text-primary-500 transition-colors font-body whitespace-nowrap"
+                        >
                             PROFILE
+                        </NavLink> */}
+                        <NavLink
+                            to="/signup"
+                            className="border-2 border-primary-500 text-primary-500 rounded-full px-4 xl:px-6 py-1.5 xl:py-2 text-sm xl:text-base hover:bg-primary-500 hover:text-white transition-colors font-body whitespace-nowrap"
+                        >
+                            GET STARTED →
                         </NavLink>
-                        {/* TODO: Add logout functionality */}
                     </div>
 
-                    {/* Mobile Menu */}
-                    <div className="md:hidden">
+                    {/* Mobile Menu Button */}
+                    <div className="lg:hidden flex items-center space-x-3">
+                        <NavLink
+                            to="/signup"
+                            className="border-2 border-primary-500 text-primary-500 rounded-full px-3 py-1 text-sm hover:bg-primary-500 hover:text-white transition-colors font-body whitespace-nowrap"
+                        >
+                            GET STARTED
+                        </NavLink>
                         <button
                             onClick={() => setIsMenuOpen(!isMenuOpen)}
-                            className="text-text-600 hover:text-primary-500 transition-colors font-body"
+                            className="text-primary-500 p-1.5 hover:bg-primary-50 rounded-md transition-colors"
+                            aria-label="Toggle menu"
                         >
-                            MENU
+                            {isMenuOpen ? <FiX size={22} /> : <FiMenu size={22} />}
                         </button>
-                        {isMenuOpen && (
-                            <div className="flex flex-col space-y-2">
-                                <a href="/aboutus" className="text-text-600 hover:text-primary-500 transition-colors font-body">
-                                    ABOUT US
-                                </a>
-                                <NavLink
-                                    to="/login"
-                                    className="text-text-600 hover:text-primary-500 transition-colors font-body"
-                                >
-                                    LOGIN
-                                </NavLink>
-                                <a href="mailto:myndfull@gmail.com" className="text-text-600 hover:text-primary-500 transition-colors font-body">
-                                    CONTACT US
-                                </a>
-                                <button
-                                    onClick={handleLogout}
-                                    className="text-text-600 hover:text-primary-500 transition-colors font-body"
-                                >
-                                    LOGOUT
-                                </button>
-                                <NavLink to="/profile" className="text-text-600 hover:text-primary-500 transition-colors font-body">
-                                    PROFILE
-                                </NavLink>
-                            </div>
-                        )}
                     </div>
-
-                    {/* CTA Button */}
-                    <button className="border-2 border-primary-500 text-primary-500 rounded-full px-6 py-2 hover:bg-primary-500 hover:text-text-50 transition-colors font-body">
-                        <NavLink to="/signup">GET STARTED →</NavLink>
-                    </button>
                 </div>
+
+                {/* Mobile Menu Dropdown - Improved Animation and Styling */}
+                {isMenuOpen && (
+                    <div className="lg:hidden fixed inset-0 top-[57px] bg-white shadow-lg overflow-y-auto animate-fadeIn">
+                        <div className="container mx-auto px-4 py-4 space-y-2">
+                            <NavLink
+                                to="/aboutus"
+                                className="block text-sm font-medium text-text-600 hover:text-primary-500 transition-colors font-body py-3 border-b border-gray-100"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                ABOUT US
+                            </NavLink>
+                            <NavLink
+                                to="/login"
+                                className="block text-sm font-medium text-text-600 hover:text-primary-500 transition-colors font-body py-3 border-b border-gray-100"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                LOGIN
+                            </NavLink>
+                            <a
+                                href="mailto:myndfull@gmail.com"
+                                className="block text-sm font-medium text-text-600 hover:text-primary-500 transition-colors font-body py-3 border-b border-gray-100"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                CONTACT US
+                            </a>
+                            <button
+                                onClick={() => {
+                                    handleLogout();
+                                    setIsMenuOpen(false);
+                                }}
+                                className="block w-full text-left text-sm font-medium text-text-600 hover:text-primary-500 transition-colors font-body py-3 border-b border-gray-100"
+                            >
+                                LOGOUT
+                            </button>
+                            {/* <NavLink
+                                to="/profile"
+                                className="block text-sm font-medium text-text-600 hover:text-primary-500 transition-colors font-body py-3 border-b border-gray-100"
+                                onClick={() => setIsMenuOpen(false)}
+                            >
+                                PROFILE
+                            </NavLink> */}
+                        </div>
+                    </div>
+                )}
             </nav>
         </header>
     );

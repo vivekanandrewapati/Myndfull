@@ -68,9 +68,9 @@ function Register() {
         }
     };
     return (
-        <div className="flex flex-wrap min-h-screen bg-background text-text-800">
+        <div className="flex flex-wrap min-h-screen w-full bg-background text-text-800">
             {/* Left Side - Form */}
-            <div className="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:px-24 py-12">
+            <div className="w-full md:w-1/2 flex flex-col justify-center p-4 sm:p-6 md:p-12 lg:p-24">
                 <h1 className="text-4xl font-heading font-bold text-primary-500 mb-4">
                     Create Account
                 </h1>
@@ -124,7 +124,7 @@ function Register() {
                             required
                         />
                     </div>
-                    <div className="mb-6">
+                    {/* <div className="mb-6">
                         <label className="block text-sm font-medium mb-2">Avatar</label>
                         <input
                             type="file"
@@ -133,7 +133,7 @@ function Register() {
                             className="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                             required
                         />
-                    </div>
+                    </div> */}
                     <button
                         type="submit"
                         disabled={loading}
@@ -151,11 +151,11 @@ function Register() {
                 </p>
             </div>
             {/* Right Side - Image */}
-            <div className="hidden md:block w-full md:w-1/2">
+            <div className="hidden md:flex w-full md:w-1/2 h-screen items-center justify-center p-4">
                 <img
                     src={registerimg}
                     alt="Register Illustration"
-                    className="w-[90%] h-full object-cover rounded"
+                    className="w-full h-full object-contain rounded-lg"
                 />
             </div>
         </div>

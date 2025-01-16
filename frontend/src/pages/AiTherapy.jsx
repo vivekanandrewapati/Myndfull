@@ -155,33 +155,33 @@ function AiTherapy() {
     };
 
     return (
-        <div className="min-h-screen bg-background">
-            <nav className='shadow-md bg-white'>
-                <h1 className="text-2xl p-3 mx-6 font-heading font-bold  text-primary-500 mb-8">
+        <div className="min-h-screen bg-background flex flex-col">
+            {/* Header */}
+            <nav className='shadow-md bg-white sticky top-0 z-10'>
+                <h1 className="text-xl sm:text-2xl p-3 mx-4 sm:mx-6 font-heading font-bold text-primary-500">
                     AITherapy
-                </h1></nav>
-            <div className="container mx-auto px-4 py-8">
-                {/* <h1 className="text-4xl font-heading font-bold text-primary-500 mb-8">
-                    AI Therapy Chat
-                </h1> */}
+                </h1>
+            </nav>
 
-                <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+            {/* Main Chat Container */}
+            <div className="flex-1 container mx-auto px-3 sm:px-4 py-4 sm:py-8 max-w-4xl flex flex-col">
+                <div className="flex-1 bg-white rounded-lg shadow-md overflow-hidden flex flex-col max-h-[85vh]">
                     {/* Chat Messages */}
                     <div
                         ref={chatContainerRef}
-                        className="h-[60vh] overflow-y-auto p-6 scroll-smooth"
+                        className="flex-1 overflow-y-auto p-3 sm:p-6 scroll-smooth"
                     >
-                        <div className="space-y-4">
+                        <div className="space-y-3 sm:space-y-4">
                             {messages.map((message, index) => (
                                 <div
                                     key={index}
                                     className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
                                 >
                                     <div
-                                        className={`max-w-[70%] p-4 rounded-lg ${message.role === 'user'
-                                            ? 'bg-primary-500 text-white font-body'
-                                            : 'bg-gray-100 text-gray-800 font-body'
-                                            }`}
+                                        className={`max-w-[85%] sm:max-w-[75%] p-3 sm:p-4 rounded-lg ${message.role === 'user'
+                                            ? 'bg-primary-500 text-white'
+                                            : 'bg-gray-100 text-gray-800'
+                                            } text-sm sm:text-base font-body`}
                                     >
                                         {message.content}
                                     </div>
@@ -189,7 +189,7 @@ function AiTherapy() {
                             ))}
                             {loading && (
                                 <div className="flex justify-start">
-                                    <div className="bg-gray-100 p-4 rounded-lg text-gray-800">
+                                    <div className="bg-gray-100 p-3 sm:p-4 rounded-lg">
                                         <div className="flex items-center space-x-2">
                                             <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" />
                                             <div className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }} />
@@ -203,20 +203,20 @@ function AiTherapy() {
                     </div>
 
                     {/* Message Input */}
-                    <div className="border-t border-gray-200 p-4">
-                        <form onSubmit={handleSendMessage} className="flex space-x-4">
+                    <div className="border-t border-gray-200 p-3 sm:p-4 bg-white">
+                        <form onSubmit={handleSendMessage} className="flex space-x-2 sm:space-x-4">
                             <input
                                 type="text"
                                 value={newMessage}
                                 onChange={(e) => setNewMessage(e.target.value)}
                                 placeholder="Type your message..."
-                                className="flex-1 px-4 py-3 rounded-lg border focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                className="flex-1 px-3 sm:px-4 py-2 sm:py-3 rounded-lg border focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm sm:text-base"
                                 disabled={loading}
                             />
                             <button
                                 type="submit"
                                 disabled={loading || !newMessage.trim()}
-                                className={`px-6 py-3 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-colors
+                                className={`px-4 sm:px-6 py-2 sm:py-3 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-colors text-sm sm:text-base
                                     ${(loading || !newMessage.trim()) ? 'opacity-50 cursor-not-allowed' : ''}`}
                             >
                                 Send

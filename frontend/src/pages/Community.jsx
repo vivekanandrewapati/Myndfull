@@ -221,35 +221,32 @@ function Community() {
 
     return (
         <div className="min-h-screen bg-background">
-            <nav className="bg-white py-2 shadow-md">
-                <div className="container mx-8  max-w-4xl">
-                    <h1 className="text-2xl  font-heading font-bold text-primary-500 mb-8">
+            <nav className="bg-white py-2 shadow-md sticky top-0 z-10">
+                <div className="px-4 sm:px-6 lg:px-8 max-w-4xl">
+                    <h1 className="text-2xl font-heading font-bold text-primary-500 mb-4 sm:mb-6">
                         Community
                     </h1>
                 </div>
             </nav>
-            <div className="container mx-auto px-4 py-8 max-w-4xl">
-                {/* <h1 className="text-4xl font-heading font-bold text-primary-500 mb-8">
-                    Community
-                </h1> */}
 
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8 max-w-4xl">
                 {error && (
-                    <div className="bg-red-100 text-red-600 p-4 rounded-lg mb-6">
+                    <div className="bg-red-100 text-red-600 p-3 sm:p-4 rounded-lg mb-4 sm:mb-6">
                         {error}
                     </div>
                 )}
 
                 {currentUser && (
-                    <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+                    <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md mb-6 sm:mb-8">
                         <form onSubmit={handleCreatePost}>
                             <textarea
                                 value={newPost}
                                 onChange={(e) => setNewPost(e.target.value)}
                                 placeholder="Share your thoughts..."
-                                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                className="w-full px-3 sm:px-4 py-2 sm:py-3 rounded-lg border border-gray-200 focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                                 rows="3"
                             />
-                            <div className="flex items-center  font-body justify-between mt-4">
+                            <div className="flex items-center font-body justify-between mt-3 sm:mt-4">
                                 <label className="flex items-center space-x-2 text-gray-600">
                                     <input
                                         type="checkbox"
@@ -262,7 +259,7 @@ function Community() {
                                 <button
                                     type="submit"
                                     disabled={!newPost.trim() || loading}
-                                    className={`px-6 py-2 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-colors
+                                    className={`px-4 sm:px-6 py-2 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-colors
                                         ${(!newPost.trim() || loading) ? 'opacity-50 cursor-not-allowed' : ''}`}
                                 >
                                     {loading ? 'Posting...' : 'Post'}
@@ -273,17 +270,17 @@ function Community() {
                 )}
 
                 {/* Posts List */}
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                     {posts.map(post => (
-                        <div key={post._id} className="bg-white p-6 rounded-lg shadow-md font-body">
-                            <div className="flex justify-between items-center mb-4">
+                        <div key={post._id} className="bg-white p-4 sm:p-6 rounded-lg shadow-md font-body">
+                            <div className="flex justify-between items-center mb-3 sm:mb-4">
                                 <div className="flex items-center">
                                     {post.isAnonymous ? (
                                         <div className="flex items-center">
                                             <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center mr-2">
                                                 <FiUser className="w-5 h-5 text-gray-500" />
                                             </div>
-                                            <span className="text-gray-600">Anonymous</span>
+                                            <span className="text-gray-600 text-sm sm:text-base">Anonymous</span>
                                         </div>
                                     ) : (
                                         <div className="flex items-center">
@@ -292,21 +289,21 @@ function Community() {
                                                 alt="Avatar"
                                                 className="w-8 h-8 rounded-full mr-2"
                                             />
-                                            <span className="font-medium">{post.author?.fullName || 'Unknown User'}</span>
+                                            <span className="font-medium text-sm sm:text-base">{post.author?.fullName || 'Unknown User'}</span>
                                         </div>
                                     )}
                                 </div>
                                 {currentUser && post.author && currentUser._id === post.author._id && (
                                     <button
                                         onClick={() => handleDeletePost(post._id)}
-                                        className="text-gray-400 hover:text-red-500"
+                                        className="text-gray-400 hover:text-red-500 p-1"
                                     >
-                                        <FiTrash2 />
+                                        <FiTrash2 className="w-5 h-5" />
                                     </button>
                                 )}
                             </div>
 
-                            <p className="text-gray-800 mb-4">{post.content}</p>
+                            <p className="text-gray-800 text-sm sm:text-base mb-3 sm:mb-4">{post.content}</p>
 
                             <div className="flex items-center justify-between">
                                 <div className="flex items-center space-x-4">
@@ -315,29 +312,28 @@ function Community() {
                                         className="flex items-center space-x-1 text-gray-600 hover:text-primary-500"
                                     >
                                         <FiHeart
-                                            className={
-                                                currentUser && post.likes.includes(currentUser._id)
-                                                    ? 'fill-current text-primary-500'
-                                                    : ''
-                                            }
+                                            className={`w-5 h-5 ${currentUser && post.likes.includes(currentUser._id)
+                                                ? 'fill-current text-primary-500'
+                                                : ''
+                                                }`}
                                         />
-                                        <span>{post.likes.length}</span>
+                                        <span className="text-sm sm:text-base">{post.likes.length}</span>
                                     </button>
                                     <button
                                         onClick={() => setSelectedPost(post._id === selectedPost?._id ? null : post)}
                                         className="flex items-center space-x-1 text-gray-600 hover:text-primary-500"
                                     >
-                                        <FiMessageCircle />
-                                        <span>{post.comments.length}</span>
+                                        <FiMessageCircle className="w-5 h-5" />
+                                        <span className="text-sm sm:text-base">{post.comments.length}</span>
                                     </button>
                                 </div>
                             </div>
 
                             {currentUser && selectedPost?._id === post._id && (
                                 <div className="mt-4 pt-4 border-t">
-                                    <div className="space-y-4 mb-4">
+                                    <div className="space-y-3 sm:space-y-4 mb-4">
                                         {post.comments.map((comment, index) => (
-                                            <div key={index} className="flex items-start space-x-3">
+                                            <div key={index} className="flex items-start space-x-2 sm:space-x-3">
                                                 <img
                                                     src={comment.author?.avatar || '/default-avatar.png'}
                                                     alt="Avatar"
@@ -347,23 +343,23 @@ function Community() {
                                                     <span className="font-medium text-sm">
                                                         {comment.author?.fullName || 'Unknown User'}
                                                     </span>
-                                                    <p className="text-gray-600">{comment.content}</p>
+                                                    <p className="text-gray-600 text-sm sm:text-base">{comment.content}</p>
                                                 </div>
                                             </div>
                                         ))}
                                     </div>
-                                    <div className="flex space-x-2">
+                                    <div className="flex space-x-2 sm:space-x-3">
                                         <input
                                             type="text"
                                             value={comment}
                                             onChange={(e) => setComment(e.target.value)}
                                             placeholder="Add a comment..."
-                                            className="flex-1 px-4 py-2 rounded-lg border focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                            className="flex-1 px-3 sm:px-4 py-2 rounded-lg border focus:ring-2 focus:ring-primary-500 focus:border-transparent text-sm sm:text-base"
                                         />
                                         <button
                                             onClick={() => handleAddComment(post._id)}
                                             disabled={!comment.trim()}
-                                            className={`px-4 py-2 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-colors
+                                            className={`px-4 sm:px-6 py-2 bg-primary-500 text-white rounded-lg font-semibold hover:bg-primary-600 transition-colors text-sm sm:text-base
                                                 ${!comment.trim() ? 'opacity-50 cursor-not-allowed' : ''}`}
                                         >
                                             Comment

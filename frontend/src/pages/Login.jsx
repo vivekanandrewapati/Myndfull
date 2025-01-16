@@ -49,9 +49,9 @@ function Login() {
     };
 
     return (
-        <div className="flex flex-wrap min-h-screen bg-background text-text-800">
+        <div className="flex flex-wrap min-h-screen w-full bg-background text-text-800">
             {/* Left Side - Form */}
-            <div className="w-full md:w-1/2 flex flex-col justify-center px-6 md:px-12 lg:px-24 py-12">
+            <div className="w-full md:w-1/2 flex flex-col justify-center p-4 sm:p-6 md:p-12 lg:p-24">
                 <h1 className="text-4xl font-heading font-bold text-primary-500 mb-4">
                     Welcome Back!
                 </h1>
@@ -92,11 +92,11 @@ function Login() {
                 </form>
             </div>
             {/* Right Side - Image */}
-            <div className="hidden md:block w-full md:w-1/2">
+            <div className="hidden md:flex w-full md:w-1/2 h-screen items-center justify-center p-4">
                 <img
                     src={loginimg}
                     alt="Login Illustration"
-                    className="w-full h-full object-cover rounded"
+                    className="w-full h-full object-contain rounded-lg"
                 />
             </div>
         </div>
